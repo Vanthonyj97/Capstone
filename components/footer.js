@@ -1,7 +1,7 @@
 import html from "html-literal";
 
-export default state => html`
-    <footer>
-        <a id="contact-me" href="contact.html">Contact Me</a>
-</footer>
+export default () => html`
+  <footer>
+    Created By Vantino Johnson 2024
+  </footer>
 `;
