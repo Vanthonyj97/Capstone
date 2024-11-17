@@ -1,7 +1,4 @@
-import html from "html-literal";
-
-export default state => html`
-  <footer>
-    <a id="contact-me" href="contact.html">Contact Me</a>
-  </footer>
-`;
+export { default as about } from "./about";
+export { default as home } from "./home";
+export { default as contact } from "./contact";
+export { default as outfitGenerator } from "./outfitGenerator";

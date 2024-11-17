@@ -10,7 +10,7 @@ const router = new Navigo("/");
 function render(state = store.home) {
   document.querySelector("#root").innerHTML = `
       ${header(state)}
-      ${nav(store.nav)}
+      ${nav(store.links)}
       ${main(state)}
       ${footer()}
     `;
@@ -77,8 +77,6 @@ function render(state = store.home) {
 // });
 
 
-router.on("/", () => render(store.home)).resolve();
-
 router.on({
   "/": () => render(), 
 
@@ -95,7 +93,3 @@ router.on({
   }
 }})
 .resolve();
-// // add menu toggle to bars icon in nav bar
-// document.querySelector(".fa-bars").addEventListener("click", () => {
-//   document.querySelector("nav > ul").classList.toggle("hidden--mobile");
-// });
