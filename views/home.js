@@ -6,5 +6,8 @@ export default state => html`
     "WEAREVER is that place you come to for Outfit Ideas no matter the Weather,
     Occasion, and Style"
   </p>
-  <p></p>
+  <h2>
+    The weather in ${state.weather.city}
+    <p></p>
+  </h2>
 `;
