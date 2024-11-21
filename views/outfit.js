@@ -5,9 +5,22 @@ export default state => html`
   <h2>Hats</h2>
   <select id="hatSelector" name="hat">
     <option>Choose a hat...</option>
-    <option value="routeToHat1">Hat 1</option>
+    <option value="kapitalTrucker">Kapital Trucker</option>
     <option value="routeToHat2">Hat 2</option>
   </select>
+  <img
+    id="kapitalTrucker"
+    src="/Users/tino/code/savvyCoders/Capstone/Capstone/assets/hats/kapitalTrucker.png"
+    alt=""
+  />
+  <script type="text/javascript">
+    var pic = document.getElementById("pic");
+    document
+      .getElementById("select-image")
+      .addEventListener("change", function(e) {
+        pic.src = this.value;
+      });
+  </script>
   <h2>Tops</h2>
   <select id="topSelector" name="top">
     <option>Choose a top...</option>
