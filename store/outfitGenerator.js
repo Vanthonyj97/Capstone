@@ -1,4 +1,10 @@
 export default {
   header: "Outfit Generator",
-  view: "outfitGenerator"
+  view: "outfitGenerator",
+  outfitSelection: {
+    hat: "",
+    top: "",
+    bottom: "",
+    shoes: ""
+  }
 };
