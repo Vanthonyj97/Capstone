@@ -1,4 +1,23 @@
 /* Home screen */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  padding: 10px
+}
+.grid img {
+  width: 100%;
+  height: auto;
+  border: 2px solid grey;
+}
+/* .grid img img.selected {
+  border: 2px solid red;
+} */
+
+img.selected {
+  border: 4px solid green;
+}
+
 body {
   background-color: tan;
 }

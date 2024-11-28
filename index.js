@@ -73,52 +73,127 @@ router.hooks({
 
     if (view === "outfit") {
 
-      function updateOutfit() {
-        // read the choices from the select dropdowns
-        alert("An entry changed");
-        console.log("Test");
-        // update the images on the page in the outfitDiv
+const hatContainer = document.getElementById("hatGrid")
+const topContainer = document.getElementById("topGrid")
+const bottomContainer = document.getElementById("bottomGrid")
+const shoeContainer = document.getElementById("shoeGrid")
+//const highlight_border = "4px solid green";
+//const normal_border = "0";
 
-
+      function createHatGrid(){
+        let outfitPics = store.outfit.outfit
+        outfitPics.hat.forEach((src, index) =>{
+          const img = document.createElement("img")
+          img.src=src
+          img.classList.add("hat_image")
+          hatContainer.appendChild(img)
+          img.addEventListener("click", ()=>{
+            alert(`You clicked on image${index+1}`)
+            store.outfitGenerator.outfitSelection.hat = outfitPics.hat[index]
+            // Turn off the colored border for all hats
+            // Get all the objects with class hat_image
+            let hats = document.querySelectorAll('.hat_image');
+            for (let obj of hats) {
+              obj.classList.remove("selected");
+            }
+            // Turn it on for the one that was just clicked
+            img.classList.add("selected");
+          })
+        })
+      }
+      function createTopGrid(){
+        let outfitPics = store.outfit.outfit
+        outfitPics.top.forEach((src, index) =>{
+          const img = document.createElement("img")
+          img.src=src
+          img.classList.add("top_image")
+          topContainer.appendChild(img)
+          img.addEventListener("click", ()=>{
+            alert(`You clicked on image${index+1}`)
+            store.outfitGenerator.outfitSelection.top = outfitPics.top[index]
+            let tops = document.querySelectorAll('.top_image');
+            for (let obj of tops) {
+              obj.classList.remove("selected");
+              img.classList.add("selected");
+            }
+          })
+        })
+      }
+      function createBottomGrid(){
+        let outfitPics = store.outfit.outfit
+        outfitPics.bottom.forEach((src, index) =>{
+          const img = document.createElement("img")
+          img.src=src
+          img.classList.add("bottom_image")
+          bottomContainer.appendChild(img)
+          img.addEventListener("click", ()=>{
+            alert(`You clicked on image${index+1}`)
+            store.outfitGenerator.outfitSelection.bottom = outfitPics.bottom[index]
+            let bottoms = document.querySelectorAll('.bottom_image');
+            for (let obj of bottoms) {
+              obj.classList.remove("selected");
+              img.classList.add("selected");
+            }
+          })
+        })
+      }
+      function createShoeGrid(){
+        let outfitPics = store.outfit.outfit
+        outfitPics.shoes.forEach((src, index) =>{
+          const img = document.createElement("img")
+          img.src=src
+          img.classList.add("shoe_image")
+          shoeContainer.appendChild(img)
+          img.addEventListener("click", ()=>{
+            alert(`You clicked on image${index+1}`)
+            store.outfitGenerator.outfitSelection.shoes = outfitPics.shoes[index]
+            let shoes = document.querySelectorAll('.shoe_image');
+            for (let obj of shoes) {
+              obj.classList.remove("selected");
+              img.classList.add("selected");
+            }
+          })
+        })
       }
 
-      // Add listeners to select
-      let button = document.querySelector("#updateOutfitButton");
-      let hatSelect = document.querySelector("#hatSelector");
-      let topSelect = document.querySelector("#topSelector");
-      let pantsSelect = document.querySelector("#pantsSelector");
-      let shoesSelect = document.querySelector("#shoesSelector");
+      createTopGrid()
+      createBottomGrid()
+      createShoeGrid()
+      createHatGrid()
 
-      hatSelect.addEventListener("change", function(e) {
-        console.log("Hat listener fired.");
-        updateOutfit(e);
-      });
 
-      button.addEventListener("click", function(e) {
-        console.log("Button listener fired.");
-        updateOutfit(e);
-      });
-
-      shoesSelect.addEventListener("change", function(e) {
-        console.log("Shoes listener fired.");
-        updateOutfit(e);
-      });
-
-      topSelect.addEventListener("change", function(e) {
-        console.log("Top listener fired.");
-        updateOutfit(e);
-      });
-
-      pantsSelect.addEventListener("change", function(e) {
-        console.log("Pants listener fired.");
-        updateOutfit(e);
-      });
 
     }
 
+//     if (view === "outfitGenerator"){
 
+// const outfitSelectionContainer = document.getElementById("outfitSelectionGrid")
+
+//     function createOutfitSelectionGrid(){
+//       const img = document.createElement("img")
+//       img.src.src=src
+
+//     outfitSelectionContainer.appendChild(img)
+//     img.addEventListener("click", ()=>{
+//       store.outfitGenerator.outfitSelection = outfitPics[index]
+//     })
+
+//     }}
+//     createOutfitSelectionGrid()
     router.updatePageLinks();
 
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   const imageContainer = document.querySelector('.grid img');
+    //   imageContainer.addEventListener('click', function(event) {
+    //     if (event.target.tagName === 'IMG') {
+    //       // Remove border from previously selected image
+    //       const selectedImages = imageContainer.querySelectorAll('.selected');
+    //       selectedImages.forEach(img => img.classList.remove('selected'));
+    //       // Add border to newly clicked image
+    //       event.target.classList.add('selected');
+    //     }
+    //   });
+    // });
     // add menu toggle to bars icon in nav bar
 //     document.querySelector(".fa-bars").addEventListener("click", () => {
 //         document.querySelector("nav > ul").classList.toggle("hidden--mobile");
