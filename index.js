@@ -178,82 +178,18 @@ const shoeContainer = document.getElementById("shoeGrid")
         garment = garment.slice(0, firstIndex)+ garment.slice(nextIndex)
         console.log(garment)
       }
-        // event.preventDefault();
-        // console.log(event.target);
-        // Get the form element
-        // const inputList = event.target.elements;
-        // console.log("Input Element List", inputList);
+      function submitGarments(){
+        let submitButton = document.getElementById("submitGarments")
+          submitButton.addEventListener("click", ()=> {
+            console.log("this works")
+          })
 
-      //   // Create an empty array to hold the toppings
-      //   const toppings = [];
+      }
 
-      //   // Iterate over the toppings array
-
-      //   for (let input of inputList.toppings) {
-      //     // If the value of the checked attribute is true then add the value to the toppings array
-      //     if (input.checked) {
-      //       toppings.push(input.value);
-      //     }
-      //   }
-
-      //   // Create a request body object to send to the API
-      //   const requestData = {
-      //     customer: inputList.customer.value,
-      //     crust: inputList.crust.value,
-      //     cheese: inputList.cheese.value,
-      //     sauce: inputList.sauce.value,
-      //     toppings: toppings
-      //   };
-      //   // Log the request body to the console
-      //   console.log("request Body", requestData);
-
-      //   axios
-      //     // Make a POST request to the API to create a new pizza
-      //     .post(`${process.env.PIZZA_PLACE_API_URL}/pizzas`, requestData)
-      //     .then(response => {
-      //     //  Then push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
-      //       store.pizza.pizzas.push(response.data);
-      //       router.navigate("/pizza");
-      //     })
-      //     // If there is an error log it to the console
-      //     .catch(error => {
-      //       console.log("It puked", error);
-      //     });
-      // // });
     }
-//     if (view === "outfitGenerator"){
 
-// const outfitSelectionContainer = document.getElementById("outfitSelectionGrid")
-
-//     function createOutfitSelectionGrid(){
-//       const img = document.createElement("img")
-//       img.src.src=src
-
-//     outfitSelectionContainer.appendChild(img)
-//     img.addEventListener("click", ()=>{
-//       store.outfitGenerator.outfitSelection = outfitPics[index]
-//     })
-
-//     }}
-//     createOutfitSelectionGrid()
     router.updatePageLinks();
 
-    // document.addEventListener('DOMContentLoaded', function() {
-    //   const imageContainer = document.querySelector('.grid img');
-    //   imageContainer.addEventListener('click', function(event) {
-    //     if (event.target.tagName === 'IMG') {
-    //       // Remove border from previously selected image
-    //       const selectedImages = imageContainer.querySelectorAll('.selected');
-    //       selectedImages.forEach(img => img.classList.remove('selected'));
-    //       // Add border to newly clicked image
-    //       event.target.classList.add('selected');
-    //     }
-    //   });
-    // });
-    // add menu toggle to bars icon in nav bar
-//     document.querySelector(".fa-bars").addEventListener("click", () => {
-//         document.querySelector("nav > ul").classList.toggle("hidden--mobile");
-    // });
   }
 });
 

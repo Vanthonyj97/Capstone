@@ -54,11 +54,16 @@ app.get("/status", (request, response) => {
   response.send(JSON.stringify({ message: "Service healthy" }));
 });
 app.post("/outfitGallery", (request, response) => {
+  console.log(request.body);
   // recieve the incoming data for hat, Top, Bottom, shoes, outfitName
   const hat = request.body.hat;
   const top = request.body.top;
+  const bottom = request.body.bottom;
+  const shoes = request.body.shoes;
+  const outfitGallery = request.body.outfitGallery;
 
   //write the data to the mongoDB database
+
   // return the saved outfits page?
 });
 

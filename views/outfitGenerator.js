@@ -9,7 +9,7 @@ export default state => html`
   <img class="garment" src="${state.outfitSelection.bottom}" />
   <h1>Shoes</h1>
   <img class="garment" src="${state.outfitSelection.shoes}" />
-  <form method="post" action="/outfitGallery">
+  <form>
     <input type="hidden" name="hat" value="${state.outfitSelection.hat}" />
     <input type="hidden" name="top" value="${state.outfitSelection.top}" />
     <input
@@ -20,6 +20,6 @@ export default state => html`
     <input type="hidden" name="shoes" value="${state.outfitSelection.shoes}" />
     <p>To save this outfit, give it a name and then click SUBMIT.</p>
     <p>Name: <input type="text" name="outfitName" required /></p>
-    <button type="submit">Submit</button>
+    <button onClick="submitGarments()" type="button">Submit</button>
   </form>
 `;
