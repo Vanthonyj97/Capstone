@@ -158,3 +158,8 @@ form {
       margin-right: 1rem;
     }
   }
+
+img.garment {
+  width: 20em;
+  height: auto;
+}
