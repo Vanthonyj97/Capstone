@@ -1,7 +1,7 @@
 import { header, nav, main, footer } from "./components";
 import * as store from "./store";
 import Navigo from "navigo";
-import { camelCase } from "lodash";
+import { camelCase, lastIndexOf } from "lodash";
 import axios from "axios";
 
 
@@ -164,7 +164,63 @@ const shoeContainer = document.getElementById("shoeGrid")
 
 
     }
+    if (view === "outfitGenerator") {
+      console.log("this ran")
+      // Add an event handler for the submit button on the form
+      // document.addEventListener("load", event => {
+      for(let i = 0; i<4; i++ ) {
+        let garment = document.getElementsByClassName("garment")[i].src
+        garment = garment.slice(garment.lastIndexOf("/"), garment.lastIndexOf("?"))
+        let firstIndex = garment.indexOf(".")
+        garment = garment.slice(0, firstIndex)+ garment.slice(firstIndex+ 1)
+        console.log(garment)
+        let nextIndex = garment.indexOf(".")
+        garment = garment.slice(0, firstIndex)+ garment.slice(nextIndex)
+        console.log(garment)
+      }
+        // event.preventDefault();
+        // console.log(event.target);
+        // Get the form element
+        // const inputList = event.target.elements;
+        // console.log("Input Element List", inputList);
 
+      //   // Create an empty array to hold the toppings
+      //   const toppings = [];
+
+      //   // Iterate over the toppings array
+
+      //   for (let input of inputList.toppings) {
+      //     // If the value of the checked attribute is true then add the value to the toppings array
+      //     if (input.checked) {
+      //       toppings.push(input.value);
+      //     }
+      //   }
+
+      //   // Create a request body object to send to the API
+      //   const requestData = {
+      //     customer: inputList.customer.value,
+      //     crust: inputList.crust.value,
+      //     cheese: inputList.cheese.value,
+      //     sauce: inputList.sauce.value,
+      //     toppings: toppings
+      //   };
+      //   // Log the request body to the console
+      //   console.log("request Body", requestData);
+
+      //   axios
+      //     // Make a POST request to the API to create a new pizza
+      //     .post(`${process.env.PIZZA_PLACE_API_URL}/pizzas`, requestData)
+      //     .then(response => {
+      //     //  Then push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
+      //       store.pizza.pizzas.push(response.data);
+      //       router.navigate("/pizza");
+      //     })
+      //     // If there is an error log it to the console
+      //     .catch(error => {
+      //       console.log("It puked", error);
+      //     });
+      // // });
+    }
 //     if (view === "outfitGenerator"){
 
 // const outfitSelectionContainer = document.getElementById("outfitSelectionGrid")
