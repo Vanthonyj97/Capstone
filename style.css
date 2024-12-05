@@ -163,3 +163,19 @@ img.garment {
   width: 20em;
   height: auto;
 }
+
+img.gallery {
+  width:5em;
+  height: auto;
+}
+
+div#gallery {
+  width:100%;
+}
+
+.flex-container {
+  display: flex;
+}
+.flex-container > div {
+  margin-right: 5px;
+}

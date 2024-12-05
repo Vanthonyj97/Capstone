@@ -168,23 +168,75 @@ const shoeContainer = document.getElementById("shoeGrid")
       console.log("this ran")
       // Add an event handler for the submit button on the form
       // document.addEventListener("load", event => {
+      let garments = []
       for(let i = 0; i<4; i++ ) {
         let garment = document.getElementsByClassName("garment")[i].src
         garment = garment.slice(garment.lastIndexOf("/"), garment.lastIndexOf("?"))
         let firstIndex = garment.indexOf(".")
         garment = garment.slice(0, firstIndex)+ garment.slice(firstIndex+ 1)
-        console.log(garment)
         let nextIndex = garment.indexOf(".")
         garment = garment.slice(0, firstIndex)+ garment.slice(nextIndex)
+        garments.push(garment)
         console.log(garment)
       }
-      function submitGarments(){
-        let submitButton = document.getElementById("submitGarments")
-          submitButton.addEventListener("click", ()=> {
-            console.log("this works")
-          })
+      garments = [store.outfitGenerator.outfitSelection.hat,
+        store.outfitGenerator.outfitSelection.top,
+        store.outfitGenerator.outfitSelection.bottom,
+        store.outfitGenerator.outfitSelection.shoes
+      ]
 
-      }
+      // setTimeout(()=>{}, 10000)
+      // function (){
+        document.getElementById("submitButton").addEventListener("click", ()=>{
+          console.log("ran submit listener")
+          axios.post(process.env.OUTFIT_GENERATOR_API+"/outfitGallery",
+            {name: document.getElementById("outfitName").value, hat: garments[0], top: garments[1], bottom: garments[2], shoes: garments[3]}
+          ).then(function(response) {
+            console.log(response.data);
+            store.outfitGallery.outfit=response.data
+            router.navigate("/outfitGallery")
+          }).catch(function(error) {
+            console.log(error);
+          })
+        })
+
+
+
+
+    }
+
+    if (view == "outfitGallery") {
+      // load the outfits from the server
+      // display in div
+
+      axios.get(`${process.env.OUTFIT_GENERATOR_API}/getOutfits`)
+        .then(response => {
+          // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
+          console.log("response", response);
+          let html = "";
+          //let json = response.json();
+          //console.log(json);
+          for (let temp of response.data) {
+            console.log(temp);
+            html += `<br>${temp.name}
+            <div class="flex-container">
+              <div>
+                <img src="${temp.hat}" class="gallery">
+                <br><img src="${temp.top}" class="gallery">
+              </div>
+              <div>
+                <img src="${temp.bottom}" class="gallery">
+                <br><img src="${temp.shoes}" class="gallery">
+              </div>
+            </div>`;
+          }
+          document.getElementById("gallery").innerHTML = html;
+          done();
+        })
+        .catch(error => {
+          console.log("It puked", error);
+          done();
+        });
 
     }
 

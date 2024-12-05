@@ -2,6 +2,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import Outfit from "./models/Outfit.js";
 // import bodyParser from "body-parser";
 // Load environment variables from .env file
 dotenv.config();
@@ -53,23 +54,37 @@ app.get("/status", (request, response) => {
   // End and return the response
   response.send(JSON.stringify({ message: "Service healthy" }));
 });
-app.post("/outfitGallery", (request, response) => {
-  console.log(request.body);
-  // recieve the incoming data for hat, Top, Bottom, shoes, outfitName
-  const hat = request.body.hat;
-  const top = request.body.top;
-  const bottom = request.body.bottom;
-  const shoes = request.body.shoes;
-  const outfitGallery = request.body.outfitGallery;
 
-  //write the data to the mongoDB database
+app.post("/outfitGallery", async (request, response) => {
+  try {
+    console.log(request.body);
+    // recieve the incoming data for hat, Top, Bottom, shoes, outfitName
+    const outfit = new Outfit(request.body);
+    const data = await outfit.save();
+    //response.status(200).send({});
+    //write the data to the mongoDB database
 
-  // return the saved outfits page?
+    // return the saved outfits page?
+    response.json(data);
+  } catch (error) {
+    response.status(500).send("failed to save clothing");
+  }
 });
 
-app.get("/outfitGallery", (request, response) => {
+app.get("/getOutfits", async (request, response) => {
   // look up all of the saved outfits
   // generate an HTML page to display them
+  //const outfit = new Outfit();
+  const data = await Outfit.find({});
+  //console.log(all);
+  //console.log(typeof all);
+  response.json(data);
+});
+
+app.get("/deleteAll", async (request, response) => {
+  const res = await Outfit.deleteMany({});
+  console.log("Deleted all records.");
+  response.send("Deleted all records");
 });
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

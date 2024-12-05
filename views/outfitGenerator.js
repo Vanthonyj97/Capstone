@@ -19,7 +19,8 @@ export default state => html`
     />
     <input type="hidden" name="shoes" value="${state.outfitSelection.shoes}" />
     <p>To save this outfit, give it a name and then click SUBMIT.</p>
-    <p>Name: <input type="text" name="outfitName" required /></p>
-    <button onClick="submitGarments()" type="button">Submit</button>
+    <p>Name: <input type="text" id="outfitName" required /></p>
+    <button id="submitButton" type="button">Submit</button>
+    <!-- <button type="submit">Submit</button> -->
   </form>
 `;
