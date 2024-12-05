@@ -168,92 +168,80 @@ const shoeContainer = document.getElementById("shoeGrid")
       console.log("this ran")
       // Add an event handler for the submit button on the form
       // document.addEventListener("load", event => {
+      let garments = []
       for(let i = 0; i<4; i++ ) {
         let garment = document.getElementsByClassName("garment")[i].src
         garment = garment.slice(garment.lastIndexOf("/"), garment.lastIndexOf("?"))
         let firstIndex = garment.indexOf(".")
         garment = garment.slice(0, firstIndex)+ garment.slice(firstIndex+ 1)
-        console.log(garment)
         let nextIndex = garment.indexOf(".")
         garment = garment.slice(0, firstIndex)+ garment.slice(nextIndex)
+        garments.push(garment)
         console.log(garment)
       }
-        // event.preventDefault();
-        // console.log(event.target);
-        // Get the form element
-        // const inputList = event.target.elements;
-        // console.log("Input Element List", inputList);
+      garments = [store.outfitGenerator.outfitSelection.hat,
+        store.outfitGenerator.outfitSelection.top,
+        store.outfitGenerator.outfitSelection.bottom,
+        store.outfitGenerator.outfitSelection.shoes
+      ]
 
-      //   // Create an empty array to hold the toppings
-      //   const toppings = [];
+      // setTimeout(()=>{}, 10000)
+      // function (){
+        document.getElementById("submitButton").addEventListener("click", ()=>{
+          console.log("ran submit listener")
+          axios.post(process.env.OUTFIT_GENERATOR_API+"/outfitGallery",
+            {name: document.getElementById("outfitName").value, hat: garments[0], top: garments[1], bottom: garments[2], shoes: garments[3]}
+          ).then(function(response) {
+            console.log(response.data);
+            store.outfitGallery.outfit=response.data
+            router.navigate("/outfitGallery")
+          }).catch(function(error) {
+            console.log(error);
+          })
+        })
 
-      //   // Iterate over the toppings array
 
-      //   for (let input of inputList.toppings) {
-      //     // If the value of the checked attribute is true then add the value to the toppings array
-      //     if (input.checked) {
-      //       toppings.push(input.value);
-      //     }
-      //   }
 
-      //   // Create a request body object to send to the API
-      //   const requestData = {
-      //     customer: inputList.customer.value,
-      //     crust: inputList.crust.value,
-      //     cheese: inputList.cheese.value,
-      //     sauce: inputList.sauce.value,
-      //     toppings: toppings
-      //   };
-      //   // Log the request body to the console
-      //   console.log("request Body", requestData);
 
-      //   axios
-      //     // Make a POST request to the API to create a new pizza
-      //     .post(`${process.env.PIZZA_PLACE_API_URL}/pizzas`, requestData)
-      //     .then(response => {
-      //     //  Then push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
-      //       store.pizza.pizzas.push(response.data);
-      //       router.navigate("/pizza");
-      //     })
-      //     // If there is an error log it to the console
-      //     .catch(error => {
-      //       console.log("It puked", error);
-      //     });
-      // // });
     }
-//     if (view === "outfitGenerator"){
 
-// const outfitSelectionContainer = document.getElementById("outfitSelectionGrid")
+    if (view == "outfitGallery") {
+      // load the outfits from the server
+      // display in div
 
-//     function createOutfitSelectionGrid(){
-//       const img = document.createElement("img")
-//       img.src.src=src
+      axios.get(`${process.env.OUTFIT_GENERATOR_API}/getOutfits`)
+        .then(response => {
+          // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
+          console.log("response", response);
+          let html = "";
+          //let json = response.json();
+          //console.log(json);
+          for (let temp of response.data) {
+            console.log(temp);
+            html += `<br>${temp.name}
+            <div class="flex-container">
+              <div>
+                <img src="${temp.hat}" class="gallery">
+                <br><img src="${temp.top}" class="gallery">
+              </div>
+              <div>
+                <img src="${temp.bottom}" class="gallery">
+                <br><img src="${temp.shoes}" class="gallery">
+              </div>
+            </div>`;
+          }
+          document.getElementById("gallery").innerHTML = html;
+          done();
+        })
+        .catch(error => {
+          console.log("It puked", error);
+          done();
+        });
 
-//     outfitSelectionContainer.appendChild(img)
-//     img.addEventListener("click", ()=>{
-//       store.outfitGenerator.outfitSelection = outfitPics[index]
-//     })
+    }
 
-//     }}
-//     createOutfitSelectionGrid()
     router.updatePageLinks();
 
-    // document.addEventListener('DOMContentLoaded', function() {
-    //   const imageContainer = document.querySelector('.grid img');
-    //   imageContainer.addEventListener('click', function(event) {
-    //     if (event.target.tagName === 'IMG') {
-    //       // Remove border from previously selected image
-    //       const selectedImages = imageContainer.querySelectorAll('.selected');
-    //       selectedImages.forEach(img => img.classList.remove('selected'));
-    //       // Add border to newly clicked image
-    //       event.target.classList.add('selected');
-    //     }
-    //   });
-    // });
-    // add menu toggle to bars icon in nav bar
-//     document.querySelector(".fa-bars").addEventListener("click", () => {
-//         document.querySelector("nav > ul").classList.toggle("hidden--mobile");
-    // });
   }
 });
 
